@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather App</title>
+  <link rel="stylesheet" href="https://pyscript.net/releases/2024.10.1/core.css">
+  <script type="module" src="https://pyscript.net/releases/2024.10.1/core.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #74ebd5, #ACB6E5);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: #fff;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px #00000050;
+    }
+
+    .card {
+      background-color: white;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    input {
+      width: 80%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 12px 25px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌤️ Weather App</h1>
+
+  <div class="card">
+    <input type="text" id="cityInput" placeholder="Enter city name" />
+    <br />
+    <button py-click="get_weather">Check Weather</button>
+    <div id="result"></div>
+  </div>
+
+  <py-script>
+from js import document, fetch
+import asyncio
+
+api_key = "f45840ac0a9e337c9dd0b1297fa4f785"
+
+async def get_weather(event=None):
+    city = document.getElementById("cityInput").value
+    if not city:
+        document.getElementById("result").innerText = "⚠️ Please enter a city name."
+        return
+
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&units=imperial&appid={api_key}"
+    response = await fetch(url)
+    data = await response.json()
+
+    if getattr(data, "cod", 404) != 200:
+        document.getElementById("result").innerText = f"❌ Error: {getattr(data, 'message', 'City not found')}"
+    else:
+        weather = data.weather[0].main
+        temp = round(data.main.temp)
+        document.getElementById("result").innerText = f"✅ Weather in {city}: {weather}, {temp} ºF"
+  </py-script>
+</body>
+</html>
