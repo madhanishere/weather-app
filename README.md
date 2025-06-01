@@ -33,9 +33,6 @@
   <p>Add a screenshot of your application UI here:</p>
   <img src="Screenshot 2025-06-01 140316.png"" alt="Weather App Screenshot" width="500"/>
 
-  <h2>📌 Example</h2>
-  <p><strong>Input:</strong> London<br>
-     <strong>Output:</strong> Weather in London: Clouds, 61 ºF</p>
 
   <h2>💡 Future Improvements</h2>
   <ul>
@@ -44,8 +41,6 @@
     <li>Geolocation support to detect current location</li>
   </ul>
 
-  <h2>📄 License</h2>
-  <p>This project is open-source and available under the <code>MIT License</code>.</p>
 
   <h2>🙌 Acknowledgments</h2>
   <ul>
