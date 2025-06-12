@@ -30,7 +30,6 @@
   <pre><code>api_key = "your_openweathermap_api_key"</code></pre>
 
   <h2>📸 Screenshots</h2>
-  <p>Add a screenshot of your application UI here:</p>
   <img src="Screenshot 2025-06-01 140316.png"" alt="Weather App Screenshot" width="500"/>
 
 
